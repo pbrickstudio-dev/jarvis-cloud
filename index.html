@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
     
+    <!-- LEAFLET MAPS API & STYLES -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -22,7 +23,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Contenedor adaptado para Leaflet */
         #map-render-container {
             width: 100%;
             height: 100%;
@@ -30,7 +30,6 @@
             background: #0f172a;
         }
 
-        /* Forzar estética oscura/híbrida táctica sobre los mapas de calles estándar */
         .leaflet-layer, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
             filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
         }
@@ -57,6 +56,7 @@
 
     <audio id="real-audio-engine" loop></audio>
 
+    <!-- PANTALLA DE BLOQUEO DE SEGURIDAD -->
     <div id="security-lockout" class="fixed inset-0 bg-slate-950 z-[100] flex flex-col items-center justify-center p-4">
         <div class="max-w-md w-full bg-slate-900/40 border border-slate-800/80 backdrop-blur-xl rounded-3xl p-8 text-center custom-glow">
             <div class="w-20 h-20 bg-cyan-950/40 border border-cyan-500/30 rounded-full flex items-center justify-center mx-auto mb-6 relative">
@@ -70,7 +70,9 @@
         </div>
     </div>
 
+    <!-- INTERFAZ PRINCIPAL -->
     <div id="jarvis-core-ui" class="hidden min-h-screen flex flex-col">
+        <!-- BARRA SUPERIOR -->
         <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-8 py-5 flex flex-wrap justify-between items-center gap-4">
             <h1 class="text-2xl font-black tracking-widest text-cyan-400 font-mono">J.A.R.V.I.S.</h1>
             <div class="flex items-center gap-6">
@@ -83,8 +85,11 @@
             </div>
         </header>
 
+        <!-- CUERPO PRINCIPAL -->
         <main class="flex-1 p-6 max-w-[1600px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- LATERAL IZQUIERDO -->
             <div class="lg:col-span-4 flex flex-col gap-6">
+                <!-- PROTOCOLOS / OBJETIVOS GENERALES -->
                 <div class="bg-slate-900/20 border border-slate-900 rounded-3xl p-6 flex flex-col h-[240px]">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xs font-bold tracking-widest text-cyan-400 uppercase font-mono">Protocolos e Intercepción</h2>
@@ -97,6 +102,7 @@
                     <div class="flex-1 overflow-y-auto no-scrollbar"><ul id="list-objectives" class="space-y-2"></ul></div>
                 </div>
 
+                <!-- GPS INTERACTIVE MAP SYSTEM -->
                 <div class="bg-slate-900/20 border border-slate-900 rounded-3xl p-6 flex flex-col h-[350px] relative overflow-hidden group">
                     <div class="flex justify-between items-center mb-2">
                         <h2 class="text-xs font-bold tracking-widest text-cyan-400 uppercase font-mono">Mapeo Satelital Core (Live)</h2>
@@ -116,6 +122,7 @@
                     </div>
                 </div>
 
+                <!-- AUDIO ENGINE -->
                 <div class="bg-slate-900/20 border border-slate-900 rounded-3xl p-6 h-[240px] flex flex-col">
                     <h2 class="text-xs font-bold tracking-widest text-purple-400 uppercase mb-4 font-mono">Audio Engine</h2>
                     <div class="flex items-center gap-4 bg-slate-950/80 p-4 rounded-2xl mb-4">
@@ -129,7 +136,9 @@
                 </div>
             </div>
 
+            <!-- COLUMNA CENTRAL/DERECHA -->
             <div class="lg:col-span-8 flex flex-col gap-6">
+                <!-- SECCIÓN MAN - CONTROL DE ACCESO A OBJETIVOS GENERALES -->
                 <div id="man-zone-panel" class="hidden bg-cyan-950/20 border-2 border-cyan-500 rounded-3xl p-6 man-glow flex flex-col gap-4">
                     <div class="flex justify-between items-center border-b border-cyan-500/30 pb-3">
                         <div class="flex items-center gap-2">
@@ -141,6 +150,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[180px] overflow-y-auto no-scrollbar" id="man-objectives-grid"></div>
                 </div>
 
+                <!-- SECCIÓN BAT - CONTROL MAESTRO DE BORRADO -->
                 <div id="bat-zone-panel" class="hidden bg-amber-950/20 border-2 border-amber-500 rounded-3xl p-6 bat-glow flex flex-col gap-4">
                     <div class="flex justify-between items-center border-b border-amber-500/30 pb-3">
                         <div class="flex items-center gap-2">
@@ -160,6 +170,7 @@
                     </div>
                 </div>
 
+                <!-- SECCIÓN ENCRIPTADA 2969 -->
                 <div id="red-zone-panel" class="hidden bg-red-950/10 border-2 border-red-600 rounded-3xl p-6 crimson-glow flex flex-col gap-4">
                     <div class="flex justify-between items-center border-b border-red-900 pb-3">
                         <div class="flex items-center gap-2 text-red-500">
@@ -171,6 +182,7 @@
                     <div id="red-zone-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[250px] overflow-y-auto no-scrollbar"></div>
                 </div>
 
+                <!-- CONTENEDOR DEL LECTOR -->
                 <div id="document-reader-panel" class="hidden bg-slate-900/30 border border-cyan-500/30 rounded-3xl p-6 custom-glow flex flex-col h-[580px] backdrop-blur-sm">
                     <div class="flex justify-between items-center border-b border-slate-900 pb-3 mb-4">
                         <h3 id="reader-doc-title" class="text-xs font-bold text-slate-100 font-mono">Visor Operativo</h3>
@@ -203,20 +215,21 @@
                     </div>
                 </div>
 
+                <!-- INDEXACIÓN -->
                 <div class="bg-slate-900/20 border border-amber-500/20 rounded-3xl p-6 amber-glow flex flex-col gap-5">
                     <div class="flex justify-between items-center border-b border-slate-900 pb-3">
-                        <h2 class="text-xs font-bold tracking-widest text-amber-400 uppercase font-mono">Terminal de Indexación</h2>
+                        <h2 class="text-xs font-bold tracking-widest text-amber-400 uppercase font-mono">Terminal de Indexación Multi-Nube</h2>
                     </div>
                     <div class="bg-slate-950/80 rounded-2xl p-4 border border-slate-900">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                             <div class="flex flex-col gap-2">
                                 <input type="text" id="lib-title" placeholder="Título o Nombre del objetivo..." class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-200">
                                 <select id="lib-type" onchange="handleTypeChange()" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-400">
-                                    <option value="Documento / PDF">📄 Archivo PDF (.pdf)</option>
-                                    <option value="Documento / Word">📝 Archivo Word (.docx)</option>
-                                    <option value="Historieta / Cómic">📚 Historieta / Cómic</option>
-                                    <option value="Perfil Dañino">⚠️ Perfil Secreto (Sector 2969)</option>
-                                    <option value="Audio / MP3">🎵 Pista MP3 (.mp3)</option>
+                                    <option value="Documento / PDF">📄 Archivo PDF (.pdf) -> Nube Lectura</option>
+                                    <option value="Documento / Word">📝 Archivo Word (.docx) -> Nube Lectura</option>
+                                    <option value="Historieta / Cómic">📚 Historieta / Cómic -> Nube Lectura</option>
+                                    <option value="Perfil Dañino">⚠️ Perfil Secreto (Sector 2969) -> Nube Lectura</option>
+                                    <option value="Audio / MP3">🎵 Pista MP3 (.mp3) -> Nube Audio专用</option>
                                 </select>
                             </div>
                             <div id="file-binary-container" class="p-3 bg-slate-900 rounded-xl flex items-center justify-center border border-dashed border-slate-800">
@@ -229,7 +242,7 @@
                         </div>
                         <span id="binary-file-status" class="block text-[10px] text-slate-500 mb-3 font-mono">Sin datos cargados</span>
                         <textarea id="lib-content" rows="1" placeholder="Notas operacionales o descripción..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-200 mb-3 resize-none"></textarea>
-                        <button type="button" id="btn-upload" class="w-full bg-amber-500 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-widest font-mono">Indexar Entrada</button>
+                        <button type="button" id="btn-upload" class="w-full bg-amber-500 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-widest font-mono">Indexar Entrada (Bypass Sync)</button>
                     </div>
                     <div id="library-books-grid" class="max-h-[300px] overflow-y-auto no-scrollbar grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
                 </div>
@@ -250,7 +263,6 @@
         let selectedObjectiveId = null; let selectedSecretTargetId = null;
         let useLiveGPS = false;
 
-        // Variables del Core de Mapas Reales (Leaflet)
         let mapInstance = null;
         let mapMarker = null;
         const DEFAULT_LAT = -32.9160; 
@@ -261,35 +273,18 @@
             if (passwordInput.value === 'emma') {
                 document.getElementById('security-lockout').classList.add('hidden');
                 document.getElementById('jarvis-core-ui').classList.remove('hidden');
-                
-                // Inicializar el Mapa Real inmediatamente tras el desbloqueo
                 initRealWorldMap();
                 initVersionBridgeAndMigration();
             }
         }
         document.getElementById('global-password').addEventListener('keypress', (e) => { if (e.key === 'Enter') verifyAccess(); });
 
-        // Inicialización del motor de mapas interactivo estilo Google Maps
         function initRealWorldMap() {
             if (mapInstance) return;
-
-            // Instanciar mapa centrado en la región base
-            mapInstance = L.map('map-render-container', {
-                zoomControl: true,
-                attributionControl: false
-            }).setView([DEFAULT_LAT, DEFAULT_LNG], 13);
-
-            // Cargar capa de mapa de calles real (OpenStreetMap Open-Source Engine)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19
-            }).addTo(mapInstance);
-
-            // Crear el marcador táctico por defecto
+            mapInstance = L.map('map-render-container', { zoomControl: true, attributionControl: false }).setView([DEFAULT_LAT, DEFAULT_LNG], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(mapInstance);
             mapMarker = L.marker([DEFAULT_LAT, DEFAULT_LNG]).addTo(mapInstance);
-            
-            // Evento dinámico: Si el usuario arrastra o da click al mapa, actualiza telemetría HUD
             mapInstance.on('move', () => {
-                const center = mapInstance.getCenter();
                 document.getElementById('map-ping').innerText = `${(0.005 + Math.random() * 0.01).toFixed(3)}s`;
             });
         }
@@ -310,85 +305,50 @@
 
         function toggleLiveGPS() {
             const btn = document.getElementById('gps-toggle-btn');
-            
             if (!useLiveGPS) {
                 if ("geolocation" in navigator) {
                     useLiveGPS = true;
                     btn.className = "text-cyan-400 bg-cyan-950/40 border border-cyan-500 text-[9px] font-mono px-2 py-1 rounded-lg transition flex items-center gap-1";
-                    
                     navigator.geolocation.getCurrentPosition((position) => {
-                        const lat = position.coords.latitude;
-                        const lng = position.coords.longitude;
-                        
-                        updateMapPosition(lat, lng, "DISPOSITIVO_LIVE", true);
+                        updateMapPosition(position.coords.latitude, position.coords.longitude, "DISPOSITIVO_LIVE", true);
                     }, (error) => {
-                        console.error("Fallo de hardware GPS:", error);
                         stopLiveGPS();
-                        alert("No se pudo obtener la geolocalización del dispositivo.");
+                        alert("No se pudo obtener la geolocalización.");
                     }, { enableHighAccuracy: true });
-                } else {
-                    alert("Hardware de geolocalización no soportado.");
-                }
-            } else {
-                stopLiveGPS();
-            }
+                } else { alert("Hardware GPS no soportado."); }
+            } else { stopLiveGPS(); }
         }
 
         function stopLiveGPS() {
             useLiveGPS = false;
-            const btn = document.getElementById('gps-toggle-btn');
-            btn.className = "text-slate-400 bg-slate-900 border border-slate-800 text-[9px] font-mono px-2 py-1 rounded-lg transition flex items-center gap-1";
-            
-            selectedObjectiveId = null;
-            selectedSecretTargetId = null;
+            document.getElementById('gps-toggle-btn').className = "text-slate-400 bg-slate-900 border border-slate-800 text-[9px] font-mono px-2 py-1 rounded-lg transition flex items-center gap-1";
+            selectedObjectiveId = null; selectedSecretTargetId = null;
             document.getElementById('target-lock-label').classList.add('hidden');
-            
             updateMapPosition(DEFAULT_LAT, DEFAULT_LNG, "ARG_CORE", false);
         }
 
-        // Desplaza el mapa e interactúa igual que la API nativa de Google Maps panTo/setZoom
         function updateMapPosition(lat, lng, regionLabel, showLockLabel) {
             if (!mapInstance) return;
-
-            // Desplazar mapa fluidamente a las coordenadas reales
-            mapInstance.flyTo([lat, lng], 15, {
-                animate: true,
-                duration: 1.5
-            });
-
-            // Reposicionar el marcador visual
+            mapInstance.flyTo([lat, lng], 15, { animate: true, duration: 1.5 });
             mapMarker.setLatLng([lat, lng]);
-
-            // Actualizar datos del HUD flotante del mapa
             document.getElementById('map-region').innerText = regionLabel;
-            
-            const lockLabel = document.getElementById('target-lock-label');
-            if (showLockLabel) {
-                lockLabel.classList.remove('hidden');
-            } else {
-                lockLabel.classList.add('hidden');
-            }
+            if (showLockLabel) document.getElementById('target-lock-label').classList.remove('hidden');
+            else document.getElementById('target-lock-label').classList.add('hidden');
         }
 
         window.locateObjectiveOnMap = function(id) {
-            useLiveGPS = false;
-            selectedSecretTargetId = null;
+            useLiveGPS = false; selectedSecretTargetId = null;
             const target = objectives.find(o => o.id === id);
             if (!target) return;
-            
             selectedObjectiveId = id;
             document.getElementById('pulse-status-text').innerText = "PULSE: LOCKED";
-            
             updateMapPosition(target.lat, target.lng, `OBJ_TGT_${id.toString().slice(-4)}`, true);
             renderObjectives();
             if(manSectionActive) renderManObjectives();
         };
 
         window.locateSecretTargetOnMap = function(id) {
-            useLiveGPS = false;
-            selectedObjectiveId = null;
-            selectedSecretTargetId = id;
-            
+            useLiveGPS = false; selectedObjectiveId = null; selectedSecretTargetId = id;
             if (!db) return;
             const tx = db.transaction(['elements'], 'readonly');
             tx.objectStore('elements').get(id).onsuccess = function(e) {
@@ -429,15 +389,13 @@
         function lockManSection() { manSectionActive = false; document.getElementById('man-zone-panel').classList.add('hidden'); }
 
         function renderManObjectives() {
-            const container = document.getElementById('man-objectives-grid');
-            container.innerHTML = '';
+            const container = document.getElementById('man-objectives-grid'); container.innerHTML = '';
             if (objectives.length === 0) {
-                container.innerHTML = `<div class="col-span-full p-4 text-center font-mono text-xs text-slate-500">No hay objetivos activos enlazados.</div>`;
+                container.innerHTML = `<div class="col-span-full p-4 text-center font-mono text-xs text-slate-500">No hay objetivos activos.</div>`;
                 return;
             }
             objectives.forEach(obj => {
-                const isLocked = selectedObjectiveId === obj.id;
-                const div = document.createElement('div');
+                const isLocked = selectedObjectiveId === obj.id; const div = document.createElement('div');
                 div.className = `p-3 bg-slate-950 border ${isLocked ? 'border-amber-500/60 bg-amber-950/10' : 'border-slate-800 hover:border-cyan-500/40'} rounded-xl flex items-center justify-between font-mono transition`;
                 div.innerHTML = `
                     <div class="min-w-0 flex-1">
@@ -446,30 +404,22 @@
                     </div>
                     <button onclick="locateObjectiveOnMap(${obj.id})" class="ml-2 bg-cyan-950 border border-cyan-800 text-cyan-400 text-[10px] px-2.5 py-1.5 rounded-lg hover:bg-cyan-900 transition flex items-center gap-1">
                         <i class="ph ${isLocked ? 'ph-crosshair-fill text-amber-400' : 'ph-crosshair'}"></i> ${isLocked ? 'LOCK' : 'TRAZAR'}
-                    </button>
-                `;
+                    </button>`;
                 container.appendChild(div);
             });
         }
 
         function executeMasterPurge2969() {
-            if (confirm("🚨 ALERTA CRÍTICA: ¿Confirmas la purga absoluta y permanente de todos los archivos del Sector 2969?")) {
-                const tx = db.transaction(['elements'], 'readwrite');
-                const store = tx.objectStore('elements');
+            if (confirm("🚨 ALERTA CRÍTICA: ¿Confirmas la purga permanente del Sector 2969?")) {
+                const tx = db.transaction(['elements'], 'readwrite'); const store = tx.objectStore('elements');
                 store.openCursor().onsuccess = function(e) {
                     const cursor = e.target.result;
                     if (cursor) {
-                        if (cursor.value.type === "Perfil Dañino") {
-                            if(activeReadingDocId === cursor.value.id) closeReader();
-                            cursor.delete();
-                        }
+                        if (cursor.value.type === "Perfil Dañino") { if(activeReadingDocId === cursor.value.id) closeReader(); cursor.delete(); }
                         cursor.continue();
                     }
                 };
-                tx.oncomplete = function() {
-                    alert("✓ PROTOCOLO PURGA EJECUTADO.");
-                    lockSecretSection(); lockBatSection(); stopLiveGPS(); refreshUI();
-                };
+                tx.oncomplete = function() { alert("✓ PROTOCOLO PURGA EJECUTADO."); lockSecretSection(); lockBatSection(); stopLiveGPS(); refreshUI(); };
             }
         }
 
@@ -510,29 +460,21 @@
         });
 
         function writeToDatabase(object) {
-            const tx = db.transaction(['elements'], 'readwrite');
-            tx.objectStore('elements').put(object);
+            const tx = db.transaction(['elements'], 'readwrite'); tx.objectStore('elements').put(object);
             tx.oncomplete = function() { refreshUI(); };
         }
 
         function deleteFromDatabase(id) {
             if (confirm("¿Eliminar entrada del sistema?")) {
-                const tx = db.transaction(['elements'], 'readwrite');
-                tx.objectStore('elements').delete(id);
-                tx.oncomplete = function() { 
-                    if(activeReadingDocId === id) closeReader(); 
-                    if(selectedSecretTargetId === id) stopLiveGPS();
-                    refreshUI(); 
-                };
+                const tx = db.transaction(['elements'], 'readwrite'); tx.objectStore('elements').delete(id);
+                tx.oncomplete = function() { if(activeReadingDocId === id) closeReader(); if(selectedSecretTargetId === id) stopLiveGPS(); refreshUI(); };
             }
         }
 
         function toggleAbsoluteFullscreen() {
             const viewArea = document.getElementById('reader-view-area');
             if (!document.fullscreenElement) {
-                viewArea.requestFullscreen().then(() => {
-                    setTimeout(() => { if (panzoomInstance) panzoomInstance.reset(); }, 150);
-                }).catch(err => console.error(err));
+                viewArea.requestFullscreen().then(() => { setTimeout(() => { if (panzoomInstance) panzoomInstance.reset(); }, 150); }).catch(err => console.error(err));
             } else { document.exitFullscreen(); }
         }
 
@@ -545,14 +487,12 @@
                 maxScale: 12, minScale: 0.8, startScale: 1, canvas: true,
                 setTransform: (elem, { scale, x, y }) => { panzoomInstance.setStyle('transform', `scale(${scale}) translate(${x}px, ${y}px)`); }
             });
-            const parentWrapper = canvasElement.parentElement;
-            parentWrapper.addEventListener('wheel', panzoomInstance.zoomWithWheel, { passive: false });
+            canvasElement.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel, { passive: false });
         }
 
         function renderPdfPage(pageNumber) {
             if (!currentPdfInstance) return;
-            isRenderingPage = true;
-            document.getElementById('current-page-num').innerText = pageNumber;
+            isRenderingPage = true; document.getElementById('current-page-num').innerText = pageNumber;
             const progressPct = Math.round((pageNumber / totalPdfPages) * 100);
             document.getElementById('reader-progress-slider').value = progressPct;
             document.getElementById('reader-progress-label').innerText = `${progressPct}%`;
@@ -573,8 +513,7 @@
 
         function changeWordFontSize(dir) {
             currentWordFontSize = Math.max(10, Math.min(28, currentWordFontSize + (dir * 2)));
-            const container = document.getElementById('word-text-container');
-            if (container) container.style.fontSize = `${currentWordFontSize}px`;
+            const container = document.getElementById('word-text-container'); if (container) container.style.fontSize = `${currentWordFontSize}px`;
         }
 
         function setWordTheme(theme) {
@@ -602,9 +541,8 @@
                 if (activeDocBlobUrl) { URL.revokeObjectURL(activeDocBlobUrl); activeDocBlobUrl = null; }
                 currentPdfInstance = null; pageCounter.classList.add('hidden'); wordTools.classList.add('hidden'); progressContainer.classList.remove('hidden');
 
-                // Soporte nativo para lectura tanto de blobs locales antiguos como URLs de Cloudinary remotos
                 if (["Documento / PDF", "Perfil Dañino", "Historieta / Cómic"].includes(item.type)) {
-                    extBtn.classList.remove('hidden'); viewArea.innerHTML = `<div class="p-4 font-mono text-cyan-400 animate-pulse text-xs">Cargando archivo binario en el lector...</div>`;
+                    extBtn.classList.remove('hidden'); viewArea.innerHTML = `<div class="p-4 font-mono text-cyan-400 animate-pulse text-xs">Cargando binario desde pasarela de nube...</div>`;
                     
                     const loadPdfFromUint8Array = (arrayBuffer) => {
                         pdfjsLib.getDocument(new Uint8Array(arrayBuffer)).promise.then(pdf => {
@@ -623,9 +561,7 @@
                             .then(res => res.arrayBuffer())
                             .then(arrayBuffer => { loadPdfFromUint8Array(arrayBuffer); })
                             .catch(() => { viewArea.innerHTML = `<div class="p-4 text-red-400 text-xs font-mono">Fallo en la descarga de la pasarela Cloudinary.</div>`; });
-                    } else {
-                        viewArea.innerHTML = `<div class="p-4 text-slate-500 text-xs font-mono">No existe origen binario asignado para esta entrada.</div>`;
-                    }
+                    } else { viewArea.innerHTML = `<div class="p-4 text-slate-500 text-xs font-mono">No existe origen binario.</div>`; }
                 } 
                 else if (item.type === "Documento / Word") {
                     extBtn.classList.add('hidden'); progressContainer.classList.add('hidden'); wordTools.classList.remove('hidden');
@@ -645,21 +581,14 @@
                         fetch(item.fileUrl)
                             .then(res => res.arrayBuffer())
                             .then(arrayBuffer => { renderWordFromBuffer(arrayBuffer); })
-                            .catch(() => { viewArea.innerHTML = `<div class="p-4 text-red-400 text-xs font-mono">Error al descargar el documento de Word.</div>`; });
+                            .catch(() => { viewArea.innerHTML = `<div class="p-4 text-red-400 text-xs font-mono">Error de descarga.</div>`; });
                     }
                 } else {
                     extBtn.classList.add('hidden');
-                    viewArea.innerHTML = `<div class="p-5 text-slate-300 h-full overflow-y-auto no-scrollbar"><div class="whitespace-pre-wrap font-mono text-xs bg-slate-950 p-3 rounded-xl border border-slate-900">${item.content || 'Sin anotaciones de campo.'}</div></div>`;
+                    viewArea.innerHTML = `<div class="p-5 text-slate-300 h-full overflow-y-auto no-scrollbar"><div class="whitespace-pre-wrap font-mono text-xs bg-slate-950 p-3 rounded-xl border border-slate-900">${item.content || 'Sin anotaciones.'}</div></div>`;
                 }
                 document.getElementById('document-reader-panel').scrollIntoView({ behavior: 'smooth' });
             };
-        }
-
-        function closeReader() {
-            if (document.fullscreenElement) document.exitFullscreen();
-            document.getElementById('document-reader-panel').classList.add('hidden');
-            if (panzoomInstance) { panzoomInstance.destroy(); panzoomInstance = null; }
-            currentPdfInstance = null;
         }
 
         function streamMusic(id) {
@@ -668,16 +597,9 @@
                 const track = e.target.result;
                 if(track) {
                     if (activeAudioBlobUrl) URL.revokeObjectURL(activeAudioBlobUrl);
-                    
-                    if (track.fileBlob) {
-                        activeAudioBlobUrl = URL.createObjectURL(track.fileBlob);
-                        audioEngine.src = activeAudioBlobUrl;
-                    } else if (track.fileUrl) {
-                        audioEngine.src = track.fileUrl;
-                    }
-                    
-                    playerTitle.innerText = track.title;
-                    btnPlay.disabled = false; audioEngine.play();
+                    if (track.fileBlob) { activeAudioBlobUrl = URL.createObjectURL(track.fileBlob); audioEngine.src = activeAudioBlobUrl; }
+                    else if (track.fileUrl) { audioEngine.src = track.fileUrl; }
+                    playerTitle.innerText = track.title; btnPlay.disabled = false; audioEngine.play();
                 }
             };
         }
@@ -698,9 +620,7 @@
                 if(cursor) {
                     const item = cursor.value;
                     if (!query || item.title.toLowerCase().includes(query)) {
-                        if (item.type === "Perfil Dañino") {
-                            if (secretSectionActive) redGrid.appendChild(createSecretTargetCard(item));
-                        } 
+                        if (item.type === "Perfil Dañino") { if (secretSectionActive) redGrid.appendChild(createSecretTargetCard(item)); } 
                         else if(item.type === "Audio / MP3") {
                             const div = document.createElement('div');
                             div.className = "flex items-center gap-2 bg-slate-950/80 p-2 border border-slate-900 rounded-xl hover:border-purple-500/50 transition group";
@@ -710,7 +630,6 @@
                             let color = 'text-cyan-400';
                             if(item.type === "Documento / PDF") color = 'text-rose-400';
                             if(item.type === "Historieta / Cómic") color = 'text-emerald-400';
-
                             const card = createCardElement(item, color);
                             if(["Historieta / Cómic", "Libro / Novel", "Documento / PDF", "Documento / Word"].includes(item.type)) booksGrid.appendChild(card);
                             else systemGrid.appendChild(card);
@@ -719,8 +638,7 @@
                     cursor.continue();
                 }
             };
-            renderObjectives();
-            if(manSectionActive) renderManObjectives();
+            renderObjectives(); if(manSectionActive) renderManObjectives();
         }
 
         function createCardElement(item, typeTagColor) {
@@ -742,8 +660,7 @@
         }
 
         function createSecretTargetCard(item) {
-            const isTargetLocked = selectedSecretTargetId === item.id;
-            const card = document.createElement('div');
+            const isTargetLocked = selectedSecretTargetId === item.id; const card = document.createElement('div');
             card.className = `bg-slate-950 border ${isTargetLocked ? 'border-red-500 bg-red-950/10' : 'border-red-900/30 hover:border-red-500/40'} rounded-2xl p-3 flex items-center justify-between font-mono transition`;
             card.innerHTML = `
                 <div class="min-w-0 flex-1">
@@ -763,7 +680,9 @@
             return card;
         }
 
-        // CONTROL INTEGRADO DE INYECCIÓN DIRECTA A CLOUDINARY BYPASS
+        // =========================================================================
+        // MOTOR DE ENRUTAMIENTO INTELIGENTE MULTI-NUBE (OPCIÓN ESPEJO)
+        // =========================================================================
         document.getElementById('btn-upload').addEventListener('click', async () => {
             const title = document.getElementById('lib-title').value.trim(); 
             const type = document.getElementById('lib-type').value;
@@ -779,46 +698,46 @@
 
             let finalFileUrl = "";
 
-            // Pasarela de transmisión asíncrona hacia Cloudinary Storage
             if (activeFileBlob) {
-                document.getElementById('binary-file-status').innerText = "⚡ TRANSMITIENDO BINARIO A CLOUDINARY...";
+                document.getElementById('binary-file-status').innerText = "⚡ CALCULANDO ENRUTAMIENTO DE PASARELA MULTI-NUBE...";
                 
-                const CLOUD_NAME = "dftgh2c6"; 
-                const UPLOAD_PRESET = "jarvis_preset"; 
+                // --- ARQUITECTURA DE ESPEJOS ---
+                let cloudName = "dftgh2c6"; // Por defecto: Cuenta A (Lectura)
+                let uploadPreset = "jarvis_preset"; 
+                let resourceType = "raw";
+
+                // Si detecta pista de audio, cambia el destino físico en caliente a la Cuenta B
+                if (type === "Audio / MP3") {
+                    cloudName = "dr5dtlvmh"; // Cuenta B enlazada con éxito
+                    uploadPreset = "jarvis_preset_audio";  
+                    resourceType = "video";
+                }
 
                 const formData = new FormData();
                 formData.append("file", activeFileBlob);
-                formData.append("upload_preset", UPLOAD_PRESET);
-                
-                let resourceType = "raw";
-                if (type === "Audio / MP3") resourceType = "video";
+                formData.append("upload_preset", uploadPreset);
 
                 try {
-                    const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`, {
+                    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`, {
                         method: "POST",
                         body: formData
                     });
 
-                    if (!response.ok) throw new Error("Fallo en la pasarela de Cloudinary");
+                    if (!response.ok) throw new Error("Rechazo en la firma del nodo de destino.");
                     
                     const data = await response.json();
                     finalFileUrl = data.secure_url; 
-                    document.getElementById('binary-file-status').innerText = "✓ CLOUDINARY SYNC COMPLETED";
+                    document.getElementById('binary-file-status').innerText = "✓ SYNC MULTI-NUBE COMPLETED";
                 } catch (error) {
                     console.error(error);
-                    document.getElementById('binary-file-status').innerText = "🚨 ERROR DE TRANSMISIÓN DE CAPA FÍSICA";
-                    alert("No se pudo sincronizar el archivo con Cloudinary. Verifique el preset.");
+                    document.getElementById('binary-file-status').innerText = "🚨 FALLO DE RUTEO EN CAPA FÍSICA";
+                    alert("Error en la inyección de datos. Asegúrese de que el preset 'jarvis_preset_audio' esté creado como Unsigned en la cuenta B.");
                     return;
                 }
             }
 
             const itemPayload = { 
-                id: Date.now(), 
-                title: title, 
-                type: type, 
-                content: content, 
-                cover: cover, 
-                fileUrl: finalFileUrl // El payload ahora solo transporta texto/texto indexado libre de carga RAM
+                id: Date.now(), title: title, type: type, content: content, cover: cover, fileUrl: finalFileUrl 
             };
             
             if (type === "Perfil Dañino") {
@@ -827,12 +746,8 @@
             }
 
             writeToDatabase(itemPayload);
-            document.getElementById('lib-title').value = ''; 
-            document.getElementById('lib-content').value = ''; 
-            activeFileBlob = null;
-            setTimeout(() => {
-                document.getElementById('binary-file-status').innerText = "Sin datos cargados";
-            }, 2000);
+            document.getElementById('lib-title').value = ''; document.getElementById('lib-content').value = ''; activeFileBlob = null;
+            setTimeout(() => { document.getElementById('binary-file-status').innerText = "Sin datos cargados"; }, 2000);
         });
 
         document.getElementById('form-objective').addEventListener('submit', (e) => {
@@ -845,10 +760,7 @@
         });
         
         window.toggleObjective = function(id) { objectives = objectives.map(o => o.id === id ? { ...o, completed: !o.completed } : o); saveObjectives(); refreshUI(); };
-        window.deleteObjective = function(id) { 
-            if(selectedObjectiveId === id) stopLiveGPS();
-            objectives = objectives.filter(o => o.id !== id); saveObjectives(); refreshUI(); 
-        };
+        window.deleteObjective = function(id) { if(selectedObjectiveId === id) stopLiveGPS(); objectives = objectives.filter(o => o.id !== id); saveObjectives(); refreshUI(); };
 
         function renderObjectives() {
             const list = document.getElementById('list-objectives'); list.innerHTML = '';
@@ -868,3 +780,4 @@
     </script>
 </body>
 </html>
+    
